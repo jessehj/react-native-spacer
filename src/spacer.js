@@ -26,16 +26,16 @@ export default class Spacer extends React.PureComponent {
 
     componentDidMount() {
 
-        Keyboard.addListener(showListenerEvent, this._keyboardWillShow);
-        Keyboard.addListener(hideListenerEvent, this._keyboardWillHide);
+        this.keyboardWillShowListener = Keyboard.addListener(showListenerEvent, this._keyboardWillShow);
+        this.keyboardWillHideListener = Keyboard.addListener(hideListenerEvent, this._keyboardWillHide);
 
         this._spaceMargin = this.props.spaceMargin;
         this._isActive = false
     }
 
     componentWillUnmount() {
-        Keyboard.removeListener(showListenerEvent, this._keyboardWillShow);
-        Keyboard.removeListener(hideListenerEvent, this._keyboardWillHide);
+        this.keyboardWillShowListener.remove();
+        this.keyboardWillHideListener.remove();
     }
 
     _getContainer() {
